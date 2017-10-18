@@ -1,0 +1,156 @@
+1.上传图片
+upload.php
+if(isset($_FILES['file'])){
+        var_dump($FILES['file']);
+        var_dump(is_uploaded_file($FILES['file']));
+        //if($FILES['file']['size'])>'1024'){
+            //exit("上传失败！");
+        //}
+        //以时间命名图片名
+        $filename=date("y").date("m").date("d").date("h").date("i").date("s");
+}
+//将图片保存在指定的文件中
+move_uploaded_file($_FILES['file']["tmp_name]","images/".$filename.".jpg");
+include "conn.php";
+mysql_query("insert into imgs(img_name) values(".$filename.")");
+
+
+upload.html
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    //限制图片大小
+    <input type="hidden" name="MAX_FILE_SIZE" VALUE="1024">
+    <input type="file" name="file"><br>
+    <input type="submit" value="上传">
+</form>
+//move_uploaded_file($_FILES['文件名']['临时文件'],"保存路径");
+2.菜品管理系统
+（1）建表
+    user
+    字段名         类型          是否主键        长度
+    id              int             是            20
+    uname           varchar                       200
+    upass           varchar                       200
+
+    type
+    字段名         类型          长度          是否主键
+      id            int           20             是
+    t_id        varchar        20             否
+    t_name         varchar        200            否
+
+    food
+    字段名         类型          长度          是否主键
+    id              int         20              是
+    t_id         int         20              否
+    f_name          varchar     50              否
+    f_price           varchar     20              否
+    f_img             varchar     50              否
+    f_description     varchar     255             否
+
+    建立连接
+    //关联food表和type表
+    select * from food where food.t_id=type._id and food.t_id=1
+
+    menu.html
+    <form action="login.php" method="get">
+        账户 <input name="uname">
+        密码 <input name="upass">
+        <input type="submit">
+    </form>
+
+
+    login.php
+    include "conn.php"; //test
+
+    if(isset($_GET['uname'])&&isset($_GET['upass'])){
+        $uname=$_GET['uname'];
+        $upass=$_GET['upass'];
+
+        session_start();
+        $_SESSION['name']=$uname;
+    }
+    $res=mysql_query("select * from user where uname='".$uname."'and upass='".$upass."'");
+    $rows=mysql_num_rows($res);
+    if($res>0){
+        echo "登录成功!"
+        header("Location:food.php");
+    }else{
+        echo "用户名或密码错误！";
+    }
+    mysql_close($con);
+
+
+    food.php
+    session_start();
+    echo "欢迎".$_SESSION['name]."'登录！";
+    <br>
+    $key="";
+    if(isset($_EGT['key'])){
+        $key=$_EGT['key'];
+    }
+
+    if(isset($_EGT['sel'])){
+        $sel=$_EGT['sel'];
+    }
+
+    if($sel==0){
+        $res=mysql_query("select * from food，type where food.t_id=type.t_id and f_name like '".$key."'");
+    }else{
+        $res=mysql_query("select * from food，type where food.t_id=type.t_id and f_name like '".$sel."'");
+    }
+
+
+    $str="";
+    while($rs=mysql_fetch_assoc($res)){
+        var_dump($rs);
+        echo "<br>";
+        $str.="<tr>
+                   <td>".$rs['id']."</td>
+                   <td>".$rs['t_name']."</td>
+                   <td>".$rs['f_name']."</td>
+                   <td>￥".$rs['f_price']."</td>
+                   <td><img src='images/".$rs['f_img'].".jpg'</td>
+                   <td>".$rs['description']."</td>
+                   <td><a href='del.php?id=".$rs['f_id']."'">删除</a>/修改</td>
+              </tr>";
+
+    }
+
+
+
+    <html>
+
+        <form name="f1" action="food.php" method="get">
+            <select name="sel">
+                <option value="0">全部</option>
+                <option value="1">热菜</option>
+                <option value="2">凉菜</option>
+                <option value="3">酒水</option>
+                <option value="4">主食</option>
+            </select>
+        </form>
+        <form name="f2" action="food.php" method="get">
+            <input name="key">
+            <input type="submit">
+        </form>
+        <table>
+            <tr>
+                <td>id</td>
+                <td>类型</td>
+                <td>菜名</td>
+                <td>价格</td>
+                <td>图片</td>
+                <td>描述</td>
+                <td>操作</td>
+            </tr>
+            <?php echo $str?>
+    </html>
+
+
+    del.php
+    include "conn.php";
+    if(isset($_GET['id'])){
+        $id=$_GET['id'];
+    }
+    mysql_query("delete form food where food.f_id="$id);
+    header("location:food.php");
+

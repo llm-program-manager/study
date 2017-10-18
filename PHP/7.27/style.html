@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>样式改变</title>
+    <script src="../7.26/js/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    颜色：<input type="text" ng-model="color"> <br>
+    大小：<input type="text" ng-model="size"><br>
+    <div ng-style="{color:color,fontSize:size+'px'}">h5edu</div>
+</div>
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.color='red';
+        $scope.size='38';
+    }])
+</script>
+</body>
+</html>

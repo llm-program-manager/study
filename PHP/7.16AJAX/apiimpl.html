@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container{
+            width:500px;
+            height:700px;
+            margin:0px auto;
+        }
+        #containt{
+            width:300px;
+            height:500px;
+            background:#ccc;
+            border:1px solid yellow;
+        }
+        input{
+            margin:0px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <input type="text" id="month">月<br><br>
+    <input type="text" id="day">日<br><br>
+    <input type="button" onclick="createAjax()" value="测试"><br><br>
+    <label>结果</label>
+    <div id="containt"></div>
+</div>
+
+<script>
+    function createAjax(){
+        var month=document.getElementById("month").value;
+        var day=document.getElementById("day").value;
+        var containt=document.getElementById("containt");
+        var http;
+        //判断浏览器类型
+        if(window.ActiveXObject){
+            http=new ActiveXObject("Microsoft.XMLHTTP");
+        }else{
+            http=new XMLHttpRequest();
+        }
+        //发送网络请求
+        var url="http://apis.baidu.com/netpopo/todayhistory/query?month="+month+"&day="+day;
+        http.open("get",url,true);
+        //发送方式 地址 异步加载
+        http.setRequestHeader("apikey","dea8e42c337e5617103a73748523632e");
+        //发送
+        http.send();
+        //请求回调函数
+        http.onreadystatechange=function(){
+            if(http.readyState == 4 && http.status == 200){
+                var obj=eval("("+http.response+")");
+                console.log(obj);
+                //var str="";
+                //str+="<li>"+obj.result.caishen+"</li>";
+                containt.innerHTML=obj.result[0].title;
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

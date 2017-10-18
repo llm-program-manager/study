@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>"当"检查</title>
+    <script src="../../res/angular.min.js"></script>
+    <script src="../../res/jquery.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    {{name}}<br>
+    <button ng-click="callback()">angular事件</button><br><br>
+    <button id="btn">Jquery事件</button>
+</div>
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.name='yes';
+        $scope.callback=function(){
+           // return $scope.name="yeh,victory!"
+            $scope.name="I come in！"
+        };
+        $('#btn').click(function(){
+            //alert(3);
+            $scope.name="click jquery success!";
+            $scope.$apply();
+        });
+    }]);
+
+</script>
+</body>
+</html>

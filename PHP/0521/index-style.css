@@ -1,0 +1,68 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+body{
+    background:url("images/admin-login-bg.jpg") no-repeat;
+    background-position:-100px -164px;
+}
+.header{
+    width:100%;
+    height:60px;
+    background:rgb(66,99,116);
+}
+.containe{
+    width:617px;
+    height:368px;
+    background:url("images/admin-loginform-bg.png");
+    margin:0px auto;
+    margin-top:89px;
+}
+.containe-login{
+    width:413px;
+    height:260px;
+    margin:0px auto;
+    padding-top:57px;
+}
+input{
+    margin-bottom:20px;
+    font-size:18px;
+}
+.input-name,.input-pwd{
+    width:358px;
+    height:40px;
+}
+.input-code{
+    width:179px;
+    height:40px;
+}
+.input-submit,.input-reset{
+    width:93px;
+    height:40px;
+    border-radius:5px;
+}
+.input-submit{
+    background:rgb(94,185,94);
+}
+.input-submit:hover{
+    background:rgb(105,220,120);
+}
+.input-reset{
+    background:#ccc;
+}
+.input-reset:hover{
+    background:gray;
+}
+.footer{
+    width:100%;
+    height:75px;
+    background:rgb(66,99,116);
+    margin-top:70px;
+}
+.copyright{
+    width:500px;
+    height:30px;
+    margin:0px auto;
+    line-height:75px;
+    color:white;
+}

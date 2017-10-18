@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex布局</title>
+    <style>
+        .container{
+            display:flex;
+            border:1px solid black;
+            width:1018px;
+            height:160px;
+            justify-content:space-between;
+            align-items:center;
+        }
+        .container1,.container2,.container3,
+        .container4, .container5,.container6,
+        .container7,.container8,.container9{
+            display:flex;
+            border:1px solid dodgerblue;
+            width:100px;
+            height:150px;
+        }
+        .container1{
+            justify-content:center;
+            align-content:center;
+        }
+        .container1 .item,.container2 .item,.container3 .item,
+        .container4 .item,.container5 .item,.container6 .item,
+        .container7 .item,.container8 .item,.container9 .item{
+            border:1px solid green;
+            width:25px;
+            height:25px;
+            border-radius:50%;
+            background:blue;
+        }
+        .container1 .item{
+            align-self:center;
+        }
+        .container2{
+            flex-direction:column;
+            justify-content:space-around;
+            align-items:center;
+        }
+        .container3{
+            justify-content:space-around;
+            align-content:center;
+        }
+        .container3 .item:nth-child(1),
+        .container7-1 .item:nth-child(1){
+            align-self:flex-start;
+        }
+        .container3 .item:nth-child(2),
+        .container7-1 .item:nth-child(2){
+            align-self:center;
+        }
+        .container3 .item:nth-child(3),
+        .container7-1 .item:nth-child(3){
+            align-self:flex-end;
+        }
+        .container4,.container5,.container6,.container8,.container9{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .container4-1,.container6-1,.container8-1{
+            width:54px;
+            heigth:90px;
+            display:flex;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+        .container4-1 .item:nth-child(1),
+        .container4-1 .item:nth-child(2){
+            margin-bottom:30px;
+        }
+        .container5{
+            flex-direction:column;
+            align-content:center;
+            justify-content:center;
+        }
+        .container5-1,.container5-3{
+            width:60px;
+            height:27px;
+            justify-content:space-around;
+            align-content:center;
+            display:flex;
+        }
+        .container6-1 .item:nth-child(1),
+        .container6-1 .item:nth-child(2){
+            margin-bottom:20px;
+        }
+        .container7{
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            display:flex;
+        }
+        .container7-1{
+            width:75px;
+            height:50px;
+            justify-content:space-around;
+            align-content:center;
+            display:flex;
+        }
+        .container7-2{
+            width:65px;
+            height:54px;
+            display:flex;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+        .container7-2 .item:nth-child(1),
+        .container7-2 .item:nth-child(3){
+            margin-right:9px;
+        }
+        .container9-1{
+            width:81px;
+            heigth:90px;
+            display:flex;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+        .container9-1 .item:nth-child(1),
+        .container9-1 .item:nth-child(2),
+        .container9-1 .item:nth-child(3),
+        .container9-1 .item:nth-child(4),
+        .container9-1 .item:nth-child(5),
+        .container9-1 .item:nth-child(6){
+            margin-bottom:15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="container1">
+        <div class="item"></div>
+    </div>
+    <div class="container2">
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+    <div class="container3">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+    <div class="container4">
+        <div class="container4-1">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+    <div class="container5">
+        <div class="container5-1">
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+        <div class="container5-2">
+            <div class="item"></div>
+        </div>
+        <div class="container5-3">
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+    <div class="container6">
+        <div class="container6-1">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+    <div class="container7">
+        <div class="container7-1">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+
+        </div>
+        <div class="container7-2">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+    <div class="container8">
+        <div class="container8-1">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+    <div class="container9">
+        <div class="container9-1">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

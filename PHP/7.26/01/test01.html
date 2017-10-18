@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test01</title>
+    <script src="../js/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="h5" ng-controller="ctrl">
+
+            {{name}}
+
+
+        <p ng-bind="name"></p>
+        请输入一段文字：<input type="text" ng-model="name">
+    </div>
+    <script>
+        var m=angular.module("h5",[]);
+        m.controller("ctrl",['$scope',function($scope){
+            $scope.name="h5edu";
+
+        }])
+    </script>
+</body>
+</html>

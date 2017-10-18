@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+
+</head>
+<body>
+
+<div id="form-css">
+    <form action="../php/login.php" method="get">
+        账号：<input type="text" name="uname" id="uname"><span id="name_tip"></span><br><br>
+        密码：<input type="password" name="upass" id="upass"><span id="pass_tip"></span><br><br>
+        <input type="button" value="登录" onclick="createAjax()">
+    </form>
+</div>
+
+</body>
+
+<script>
+    function createAjax(){
+        //获取值
+        var uname=document.getElementById("uname").value;
+        var upass=document.getElementById("upass").value;
+        var name_tip=document.getElementById("name_tip");
+        var pass_tip=document.getElementById("pass_tip");
+
+        //判断浏览器类型
+        var http;
+        if(window.ActiveXObject){
+            http=new ActiveXObject("Microsoft.XMLHTTP")
+        }else{
+            //创建XMLHttpRequest()对象
+            http=new XMLHttpRequest();
+        }
+
+        //发送网络请求
+        var url="loginimpl.php?uname="+uname+"upass="+upass;
+        //open(发送方式，地址，是否异步加载)
+        http.open("get",url,true);
+
+        //设置头部文件
+        http.setRequestHeader("apikey","dea8e42c337e5617103a73748523632e");
+
+        //发送
+        http.send();
+
+        //请求回调函数
+        http.onreadystatechange=function(){
+
+            if(http.readyState == 4&&http.status == 200){
+                    var obj=eval("("+http.response+")");
+                    console.log(obj);
+                    name_tip.innerHTML=obj.msg;
+                    pass_tip.innerHTML=obj.msg;
+            }
+        }
+    }
+</script>
+</html>

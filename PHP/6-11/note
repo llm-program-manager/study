@@ -1,0 +1,159 @@
+1.login.html
+      <form action="login.php" method="get">
+          账户 <input name="uname">
+          密码 <input name="upass">
+          <input type="submit">
+      </form>
+
+
+      login.php
+      include "conn.php"; //test
+
+      if(isset($_GET['uname'])&&isset($_GET['upass'])){
+          $uname=$_GET['uname'];
+          $upass=$_GET['upass'];
+
+          session_start();
+          $_SESSION['name']=$uname;
+      }
+      $res=mysql_query("select * from user where uname='".$uname."'and upass='".$upass."'");
+      $rows=mysql_num_rows($res);
+      if($res>0){
+          echo "登录成功!"
+          header("Location:food.php");
+      }else{
+          echo "用户名或密码错误！";
+      }
+      mysql_close($con);
+
+
+      food.php
+      session_start();
+      echo "欢迎".$_SESSION['name]."'登录！";
+      <br>
+      $key="";
+      if(isset($_EGT['key'])){
+          $key=$_EGT['key'];
+      }
+
+      if(isset($_EGT['sel'])){
+          $sel=$_EGT['sel'];
+      }
+
+      if($sel==0){
+          $res=mysql_query("select * from food，type where food.t_id=type.t_id and f_name like '".$key."'");
+      }else{
+          $res=mysql_query("select * from food，type where food.t_id=type.t_id and f_name like '".$sel."'");
+      }
+
+
+      $str="";
+      while($rs=mysql_fetch_assoc($res)){
+          var_dump($rs);
+          echo "<br>";
+          $str.="<tr>
+                     <td>".$rs['id']."</td>
+                     <td>".$rs['t_name']."</td>
+                     <td>".$rs['f_name']."</td>
+                     <td>￥".$rs['f_price']."</td>
+                     <td><img src='images/".$rs['f_img'].".jpg'</td>
+                     <td>".$rs['description']."</td>
+                     <td><a href='del.php?id=".$rs['f_id']."'">删除</a>/<a href='update.php?id=".$rs['f_id']."'>修改</a></td>
+                </tr>";
+
+      }
+
+
+
+      <html>
+
+          <form name="f1" action="food.php" method="get">
+              <select name="sel">
+                  <option value="0">全部</option>
+                  <option value="1">热菜</option>
+                  <option value="2">凉菜</option>
+                  <option value="3">酒水</option>
+                  <option value="4">主食</option>
+              </select>
+          </form>
+          <form name="f2" action="food.php" method="get">
+              <input name="key">
+              <input type="submit">
+          </form>
+          <table>
+              <tr>
+                  <td>id</td>
+                  <td>类型</td>
+                  <td>菜名</td>
+                  <td>价格</td>
+                  <td>图片</td>
+                  <td>描述</td>
+                  <td>操作</td>
+              </tr>
+              <?php echo $str?>
+      </html>
+
+
+      delete.php
+      include "conn.php";
+      if(isset($_GET['id'])){
+          $id=$_GET['id'];
+      }
+      mysql_query("delete form food where food.f_id="$id);
+      header("location:food.php");
+
+      add.php
+      include "conn.php";
+      echo "添加菜品";
+      if(isset($_POST['submit'])){
+          $t_id=$_POST['t_id'];
+          $f_name=$_POST['f_name'];
+          $f_price=$_POST['f_price'];
+          $f_img=$_FILES['f_img'];
+          $f_description=$_POST['f_description'];
+          $filename=date("y").date("m").date("d").date("h").date("i").date("s")
+          move_uploaded_file($f_img['tmp_name'],"images/".$filename.".jpg");
+          mysql_query("insert into food(t_id,f_name,f_price,f_img,f_description) values ('".$t_id."','".$f_name."','".$f_price."','".$filename."','".$f_description."'");
+          header("location:food.php");
+      }
+      <html>
+            <form action="add.php" method="post" enctype="multipart/form-data">
+            类型<input name="t_id">
+            菜名<input name="f_name">
+            价格<input name="f_price">
+            图片<input name="f_img" type="file">
+            描述<input name="f_description">
+            <input type="submit" name="submit" value="添加">
+            </form>
+      </html>
+
+      update.php
+      include "conn.php";
+      if(isset($_GET['id'])){
+            $id=$_GET['id'];
+            $res=mysql_query("select * from food where f_id='".$id."'");
+            $rs=mysql_fetch_assoc($res);
+      }
+      if(isset($_GET['submit'])){
+                 $f_id=$_GET['id'];
+                $t_id=$_GET['t_id'];
+                $f_name=$_GET['f_name'];
+                $f_price=$_GET['f_price'];
+                $f_img=$_FILES['f_img'];
+                $f_description=$_GET['f_description'];
+                $filename=date("y").date("m").date("d").date("h").date("i").date("s")
+                move_uploaded_file($f_img['tmp_name'],"images/".$filename.".jpg");
+                mysql_query("update food set t_id='".$t_id."',f_name='".$f_name."',f_price='".$f_price."',f_img='".$filename."',f_description='".$f_description."'where f_id='".$f_id."'");
+                header("location:food.php");
+            }
+      <html>
+          <form action="update.php" method="post" enctype="multipart/form-data">
+              <input value="<?php echo $_GET['id']?>" name="id">
+              类型<input name="t_id" value="<?php $rs['t_id']?>">
+              菜名<input name="f_name" value="<?php $rs['f_name']?>">
+              价格<input name="f_price" value="<?php $rs['f_price']?>">
+              图片<input name="f_img" type="file">
+              描述<input name="f_description" value="<?php $rs['f_description']?>">
+              <input type="submit" name="submit" value="添加">
+          </form>
+      </html>

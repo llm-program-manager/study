@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>controller</title>
+    <script src="../res/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    {{name}}
+
+    <myh5></myh5>
+</div>
+
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.name=123;
+    }]);
+    m.directive('myh5',(function(){
+        return{
+            restrict:'E',
+            templateUrl:'aim.html',
+            controller:['$scope',function($scope){
+                $scope.data=[
+                    {'id':1,'name':'red','mean':'stop'},
+                    {'id':2,'name':'yellow','mean':'wait'},
+                    {'id':3,'name':'green','mean':'go'}];
+            }]
+        }
+    }))
+</script>
+</body>
+</html>

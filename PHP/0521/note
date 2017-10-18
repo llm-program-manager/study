@@ -1,0 +1,61 @@
+1.php文件中嵌套html
+index.html
+    <html>
+    <title>文件留言板</title>
+    <body>
+        <form action="message.php" method="get">
+            请输入账号：<input type="text" name="name">
+            <input type="submit" value="登录">
+        </form>
+    </body>
+    </html>
+
+
+message.php
+    html
+    <form action="message.php">
+        标题：<input type="text" name="title"><br><br>
+        内容：<textarea name="txt" cols="20" rows="22"></textarea><br><br>
+        <input type="submit" value="留言">
+
+    </form>
+    <?PHP
+        echo $msg;
+    >
+    //php中的会话 本地存储
+    session_start();//第一步 打开session_start();
+    if(isset($_GET['name'])){
+        $_SESSION['name']=$_GET['name'];//第二步 存储
+    }
+    echo "<h1>欢迎--".$_SESSION['name']."--登录留言板</h1>"
+    //读取留言
+    $fp=fopen('msg.txt','r');
+    $str=fread($fp,filesize('msg.txt'));
+    fclose($fps);
+
+    $arr=explode("<@>",$str);
+    $msg="";
+    for($i=count($arr)-2;$i>0;$i--){
+        $s=$arr[$i];
+        $txt=explode("|",$s);
+        $msg.="<div style="height:20==150px;border:1px solid red;">
+                           <span style="";>".$txt[0]."</span>
+                           <span>".今天天气不错."</span>
+                           <p>".内容."</p>
+                       </div>";
+    }
+
+addMsg.php
+    session_start();
+    if(isset($_GET['title']&&isset($_GET['txt'])){
+        $name= $_SESSION['name'];
+        $title=$_GET['title'];
+        $txt=$_GET['txt'];
+        $str=$name."|".$title"|".$title."<@>";
+        $fp=fopen("msg.txt",'a');
+        fwrite($fp,$str);
+        //PHP中的方法 跳转界面
+        header("location:message.php");
+    }else{
+        echo "请补全内容";
+    }

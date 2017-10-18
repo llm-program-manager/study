@@ -1,0 +1,87 @@
+1.查询语句
+select # from user limit 0,3;
+从第0条开始，显示3条
+select * from user order by information.id desc;
+倒序显示
+
+2.留言板
+新建表存留言
+message
+字段名   属性
+id       int
+name     varchar
+title    varchar
+content  varchar
+
+message.php
+session_start();
+echo "<h1>欢迎".$_SESSION['name']."留言</h1>";
+//添加留言
+include "conn.php";
+if(isset($_POST['title'])&&isset($_POST['content'])){
+    $resa=mysql_query("insert into user('name','title','content') values('".$_SESSION['name']."','".$_POST['title']."','".$POST['content']."')");
+}
+
+//显示留言
+function change($nowpage){
+    include "conn.php";
+    echo $con;//测试连接是否成功
+    $res=mysql_query("select * from information order by information.id desc limit ".($nowpage-1)*3.",3");
+    $str="";
+    while($rs=mysql_fetch_assoc($res)){ //mysql_fetch_assoc($res) fetch游标
+       // var_dump($s);
+        //echo "<br>";
+        $str.="<p>".$_SESSION['name']."</p>
+                   <p>".$rs['title']."</p>
+                   <p>".$rs['content']."</p>
+                   <hr>";
+    }
+    echo $str;
+    mysql_close($con);
+}
+
+//添加表单 提交留言
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+<form action="message.php" method="post">
+    标题:<input type="text" name="title"><br><br>
+    内容:<input type="text" name="content"><br><br>
+    <input type="submit" value="提交">
+</form>
+<div>
+    <?php
+    $nowp=1;
+    $num=mysql_query("select * from information");
+    $rows=mysql_num_rows($num);
+    $pages=ceil($rows/3);//总页数
+
+    if(isset($_GET['nowp'])){
+        $nowp=$_GET['nowp']
+    }
+    //上一页
+    if($nowp==1){
+        $prevpage=$pages;
+    }else{
+        $prevpage=$nowp-1;
+    }
+    //下一页
+    if($nowp==$pages){
+        $nextpage=1;
+    }else{
+        $nextpage=$nowp+1;
+    }
+    $lastpage=$pages;//最后一页
+    change($nowp);//调用函数
+    ?>
+</div>
+<a href="message.php?nowp=1">第一页</a>
+<a href="message.php?nowp=<?php echo $prevpage?>">上一页</a>
+<a href="message.php?nowp=<?php echo $nextpage?>">下一页</a>
+<a href="message.php?nowp=<?php echo $lastpage?>">最后一页</a>
+</body>
+</html>

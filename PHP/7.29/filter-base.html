@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>货币过滤器</title>
+    <script src="../res/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+   {{name|currency}}<br>  <!--货币过滤-->
+    {{name|currency:'￥':1}}<br>
+    {{num|number:3}}<br><!--数字过滤-->
+    {{date|date:'yy年mm月dd日 HH:mm:ss'}} <br><!--时间过滤-->
+    {{text|limitTo:3}}<br><!--字符过滤-->
+    {{text|limitTo:3:2}}<br><!--从第二个字符开始截取3个-->
+    {{str|uppercase|lowercase}}<br><!--大小写转换-->
+    <!--{{arr|orderBy:arr.id:true}}<br>&lt;!&ndash;数值排序 true降序排列&ndash;&gt;-->
+    <!--{{arr|filter:'o'}}<br>&lt;!&ndash;筛选含有满足条件的记录&ndash;&gt;-->
+    {{arr}}
+    <button ng-click="orderBy()">显示过滤后的记录</button>
+</div>
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope','$filter',function($scope,$filter){
+        $scope.name="123.456";
+        $scope.num=1343423.1259;
+        $scope.date=new Date();
+        $scope.text='世界大战爆发，抗日战争';
+        $scope.str='hello world';
+        $scope.arr=[
+            {'id':1,'age':21,'name':'John'},
+            {'id':2,'age':22,'name':'Jenny'},
+            {'id':5,'age':18,'name':'Lily'}];
+        $scope.orderBy=function(){
+            $scope.arr=$filter('orderBy')($scope.arr,'id',true);
+        };
+        }]
+    )
+</script>
+</body>
+</html>

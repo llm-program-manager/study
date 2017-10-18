@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复选框</title>
+    <script src="../js/angular.min.js"></script>
+    <style>
+        .ng-cloak{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="h5" ng-controller="MyCtrl" ng-cloak class="cloak">
+    <input type="checkbox" ng-model="data.game" ng-true-value="1" ng-false-value="0">游戏
+    <input type="checkbox" ng-model="data.movie" ng-true-value="1" ng-false-value="0">电影
+    <input type="checkbox" ng-model="data.reading" ng-true-value="1" ng-false-value="0">阅读 <br>
+    游戏{{data.game}}<br>
+    <textarea cols="50" rows="10" ng-show="data.game==1"></textarea><br>
+    电影{{data.movie}}<br>
+    <textarea cols="50" rows="10" ng-show="data.movie==1"></textarea><br>
+    阅读{{data.reading}}<br>
+    <textarea cols="50" rows="10" ng-show="data.reading==1"></textarea><br>
+</div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller("MyCtrl",['$scope',function($scope){
+        $scope.data={"game":0,"movie":0,"reading":0};
+    }])
+</script>
+</body>
+</html>

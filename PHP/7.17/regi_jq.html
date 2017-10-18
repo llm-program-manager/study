@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>regi</title>
+    <script src="../7.18/jquery-1.12.3.js"></script>
+</head>
+<body>
+
+<form action="login.php" method="get">
+    账号<input type="text" name="uname" id="uname" onblur="createAjax()">
+    <span id="tip"></span>
+    <br><br>
+    密码<input type="text" name="upass"><br><br>
+    <input type="submit" value="注册">
+</form>
+<script>
+
+    function createAjax(){
+        var name=$("#uname").val();
+        var tip=$("#tip");
+
+        $.ajax({
+            type:"get",
+            dataType:"html",
+            url:'regi_jq.php?uname='+name,
+            success:function(data){
+                console.log(data);
+                var obj=eval("("+data+")");
+                console.log(obj);
+                tip.html(obj.msg);
+            }
+        });
+    }
+</script>
+</body>
+</html>

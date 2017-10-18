@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>link</title>
+    <script src="../res/angular.min.js"></script>
+    <script src="../res/jquery.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    <h5edu title="标题" bgcolor="red" fontcolor="blue"></h5edu>
+</div>
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope',function($scope){
+    }]);
+    m.directive('h5edu',(function(){
+        return{
+            restrict:"E",
+            scope:{
+              title:'@'
+            },
+            link:function(scope,elem,attr){
+                $(elem).css({backgroundColor:attr['bgcolor'],color:attr['fontcolor']}).html(scope.title);
+            }
+        }
+    }))
+</script>
+</body>
+</html>

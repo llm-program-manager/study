@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹幕</title>
+    <link rel="stylesheet" href="../css/bullte-screen-css.css">
+    <script src="../js/jquery-1.12.3.js"></script>
+</head>
+<body>
+<div id="screen"></div><br><br>
+<input type="text" id="content">
+<input type="button" value="发送" id="btn">
+<script>
+    var mid;
+    var allmsg=[];
+
+    $(function(){
+        $("#btn").click(function(){
+            //将输入的信息传送给add-message.php
+            $.post("../php-impl/add-message.php",{content:$("#content").val()},function(data){
+                console.log(data);
+            },"json")
+            //得到弹幕消息
+            $.post("../php-impl/get-MaxId.php",null,function(data){
+                console.log(data);
+                //每次都为mid重新赋值
+                mid=parseInt(data);
+                //每隔500毫秒获得一次
+                setInterval(getallmsg,500);
+            },"json")
+            //每隔500毫秒显示一次
+            setInterval(show,500);
+            //发送完毕，清空输入框
+            $("#content").val("");
+        })
+
+        function getallmsg(){
+            $.post("../php-impl/get-message.php",{nid:mid},function(data){
+                console.log(data);
+                //如果接收到数据
+                if(data&&data.length>0){
+                    for(var n=0;n<data.length;n++){
+                        if(data[n].id>mid){
+                            //重新给mid赋值
+                            mid=data[n].id;
+                        }
+                    }
+                    console.log(data);
+                    //将消息传到数据库
+                    allmsg.push(data);
+                }
+            },"json")
+        }
+        //函数用以显示数据
+        function show(){
+            if(allmsg.length>0){
+                //移除数据
+                var nowmsg=allmsg.pop();
+                console.log(nowmsg);
+                console.log(nowmsg[0].content);
+                //将消息放到p标签
+                var p=$("<p>"+nowmsg[0].content+"</p>");
+                //将内容添加到弹幕中
+                $("#screen").append(p);
+                //生成0-300的随机数,设置消息的y值
+                var y=Math.random()*300+"px";
+                p.css({top:y});
+                //实现动画，到最左边消失
+                p.animate({left:0},5000,"",function(){
+                    $(this).remove();
+                })
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

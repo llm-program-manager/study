@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select练习</title>
+    <script src="../../7.26/js/angular.min.js"></script>
+    <style>
+        .ng-cloak{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <div ng-app="h5" ng-controller="ctrl" ng-cloak class="ng-cloak">
+        <select ng-model="city" ng-options="name as city.city for city in data"></select>
+    </div>
+    <script>
+        var m=angular.module("h5",[]);
+        m.controller("ctrl",['$scope',function($scope){
+            $scope.data=[
+                {'name':'城市','city':'北京'},
+                {'name':'城市','city':'上海'},
+                {'name':'城市','city':'广州'}]
+        }])
+    </script>
+</body>
+</html>

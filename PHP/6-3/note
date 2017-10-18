@@ -1,0 +1,74 @@
+1.数据库创建方式1-database
+xampp->mysql->bin,输入命令行mysql -u root -p,回车
+显示所有数据库
+show databases;
+创建数据库
+create database data;
+打开一个数据库
+use data;
+显示所有数据表
+show tables;
+在打开的数据库中创建一个数据表
+create table data_user(id int,uname char(20),upass char(20));
+显示这个数据库中的所有数据表
+show tables;
+查询这个数据表中插入一条记录
+insert into data_user(id,uname,upass)values(1,"Lily","124123");
+查询数据表中所有记录
+select * from data_user;
+删除数据表中的记录
+delete from data_user where id=1;
+更新一条记录
+update data_user set uname="John" where id=1;
+删除表
+drop table data_user;
+删除数据库
+drop database data;
+
+2.数据库创建方式2
+xampp->打开mysql->admin->进入编辑界面
+
+3.登录实例
+login.html
+<form action="login.php" method="get">
+    name:<input type="text" name="uname">
+    word:<input type="password" name="upass">
+    <input type="submit">
+</form>
+
+login.php
+//第一步，连接mysql
+$con=mysql_connect("localhost","root","");//本地连接，用户名，密码
+mysql_select_db("data");
+echo $con;
+//防止出现乱码
+mysql_query("set character set 'utf8'");
+mysql_query("set names 'utf8'");
+include "conn.php";//引入php文件
+if(isset($_GET['uname']&&$_GET['upass']{
+    $name=$_GET['uname'];
+    $pass=$_GET['pass'];
+    $res=mysql_query("select * from user where uname='".$name."'and upass='".$pass."'");
+    $rows=mysql_num_rows($res);
+    echo $rows;
+   // $arr=mysql_fetch_assoc($res);
+   if($row>){
+        echo "success!";
+   }else{
+        echo "error<a href='login.html'>重试</a><a href='res.html'>注册</a>";
+   }
+}
+res.html
+<form action="res.php" method="get">
+    name:<input type="text" name="uname">
+    word:<input type="password" name="upass">
+    <input type="submit">
+</form>
+res.php
+include "conn.php";
+if(isset($_GET['uname'])&&isset($_GET['upass'])){
+    $name=$_GET['uname'];
+    $pass=$_GET['pass'];
+    $res=mysql_query("insert into user(uname,upass) values("aaa","bbb")");
+    echo "success!<a href='login.html's>登录</a>";
+}

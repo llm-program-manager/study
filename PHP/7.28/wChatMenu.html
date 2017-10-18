@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信自定义菜单</title>
+    <link rel="stylesheet" href="../res/bootstrap.min.css">
+    <link rel="stylesheet" href="../res/font-awesome.min.css">
+    <link rel="stylesheet" href="wChatMenu.css">
+    <script src="../res/angular.min.js"></script>
+    <script src="../res/underscore.js"></script>
+    <style>
+        .topMenu .top,.subMenu .sub{
+            color:#ccc;
+        }
+        .topMenu .top{
+            display:none;
+        }
+        .topMenu:hover.topMenu .top{
+            display:block;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    <form class="form-horizontal">
+        <div class="container">
+            <div class="row">
+                <!--左侧的手机页面开始-->
+                <div class="col-xs-4">
+                    <div class="mobile">
+                        <dl ng-repeat="v in data.button">
+                            <dt ng-bind="v.name"></dt>
+                            <dd ng-repeat="d in v.sub_button">
+                                <a href="" ng-bind="d.name"></a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <!--左侧的手机页面结束-->
+                <!--右侧编辑页面开始-->
+                <div class="col-xs-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">编辑</div>
+                        <div class="panel-body">
+                            <!--一级菜单开始-->
+                            <div class="panel panel-default topMenu" ng-repeat="v in data.button">
+                                <i class="fa fa-times-circle top" aria-hidden="true" ng-click="reduceTop(v)"></i>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label  class="col-sm-2 control-label">标题</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" ng-model="v.name">
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="form-group" ng-if="!v.sub_button">
+                                        <label  class="col-sm-2 control-label">类型</label>
+                                        <div class="col-sm-10">
+                                            <label class="radio-inline">
+                                                <input type="radio"value="view" ng-model="v.type"> view
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio"value="click" ng-model="v.type"> click
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" ng-if="v.type=='view'">
+                                            <label class="col-sm-2 control-label">链接</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" ng-model="v.url">
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group" ng-if="v.type=='click'">
+                                                <label  class="col-sm-2 control-label">关键词</label>
+                                                <div class="col-sm-10">
+                                                    <input type="email" class="form-control" ng-model="v.key">
+                                                </div>
+                                            </div>
+                                    <!--二级菜单开始-->
+                                    <div class="panel panel-default subMenu" ng-repeat="d in v.sub_button">
+                                        <i class="fa fa-times-circle sub" aria-hidden="true" ng-click="reduceSub(v,d)"></i>
+                                        <div class="panel-body">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label  class="col-sm-2 control-label">标题</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="email" class="form-control" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label  class="col-sm-2 control-label">链接</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="email" class="form-control" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label  class="col-sm-2 control-label">关键词</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="email" class="form-control" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--二级菜单结束-->
+                                </div>
+                                <button type="button" class="btn btn-info" ng-click="addSubMenu(v)">添加二级菜单</button>
+                            </div>
+                        </div>
+                        <!--一级菜单结束-->
+                        <button type="button" class="btn btn-success" ng-click="addTopMenu()">添加一级菜单</button>
+                    </div>
+                </div>
+            <!--右侧编辑页面结束-->
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.data= {
+            "button": [
+                {
+                    "type": "click",
+                    "name": "今日歌曲",
+                    "key": "V1001_TODAY_MUSIC",
+                    "url": "www.h5edu.cn"
+                },
+                {
+                    "name": "菜单",
+                    "url": "bbs.h5edu.cn",
+                    "type": "view",
+                    "sub_button": [
+                        {
+                            "type": "view",
+                            "name": "搜索",
+                            "url": "http://www.soso.com/"
+                        },
+                        {
+                            "type": "click",
+                            "name": "赞一下我们",
+                            "key": "V1001_GOOD"
+                        }]
+                }]
+        };
+        $scope.addTopMenu=function(){
+            var menu={
+                    "type": "click",
+                    "name": "添加歌曲",
+                    "key": "V1001_TODAY_MUSIC",
+                    "url": "www.h5edu.cn"
+                };
+            if($scope.data.button.length==3){
+                alert("一级菜单最多添加3个");
+                return false;
+            }
+            $scope.data.button.push(menu);
+        };
+        $scope.addSubMenu=function(item){
+            var menu={
+                "type": "click",
+                "name": "二级添加",
+                "key": "V1001_TODAY_MUSIC",
+                "url": "www.h5edu.cn"
+            };
+            if(!item.sub_button){
+                item.sub_button=[];
+            }
+            if(item.sub_button.length==5){
+                alert("二级菜单最多添加5个");
+                return false;
+            }
+            item.sub_button.push(menu);
+        };
+        $scope.reduceTop=function(item){
+            $scope.data.button=_.without($scope.data.button,item);
+        };
+        $scope.reduceSub=function(menu,item){
+            menu.sub_button=_.without(menu.sub_button,item);
+        }
+    }]);
+</script>
+</body>
+</html>

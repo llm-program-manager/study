@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>同步机制提交网站</title>
+    <script src="../7.26/js/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    <!--0<input type="text" ng-model="data" ng-model-options="{updateOn:'blur'}"><br>-->
+    <!--1<input type="text" ng-model="data1" ng-model-options="{debounce:1000}"><br>-->
+    <input type="text" ng-model="data2" ng-model-options="{updateOn:'default blur',debounce:{default:1000,blur:0}}"><br>
+    <!--{{data}}-->
+    <!--{{data1}}-->
+    {{data2}}
+</div>
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope',function($scope){
+//        $scope.data="";
+//        $scope.data1="";
+        $scope.data2="";
+    }])
+</script>
+</body>
+</html>

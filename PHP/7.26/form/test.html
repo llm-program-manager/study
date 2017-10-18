@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form表单</title>
+    <script src="../js/angular.min.js"></script>
+    <style>
+        .ng-cloak{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl" ng-cloak class="ng-cloak">
+    <form action="test.php" method="post">
+        <input type="text" name="title" ng-model="name">
+        <input type="submit" value="提交">
+    </form>
+</div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller("ctrl",['$scope',function($scope){
+        $scope.title="h5edu";
+    }])
+</script>
+</body>
+</html>

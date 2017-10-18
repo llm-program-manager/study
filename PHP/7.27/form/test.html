@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单提交</title>
+    <script src="../../7.26/js/angular.min.js"></script>
+    <script src="../../7.26/js/jquery.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    <form action="test.php" method="post">
+        标题<input type="text" ng-model="data.title" name="title"><br>
+        点击数<input type="text" ng-model="data.click" name="click"><br>
+        <textarea name="shuju" cols="20" rows="10" ng-show="false"></textarea><br>
+        <input type="submit" value="提交">
+    </form>
+</div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.data={'title':'h5edu','click':100};
+        $('form').submit(function(){
+            $('[name="shuju"]').val(angular.toJson($scope.data));
+            //return false;
+        })
+    }])
+</script>
+</body>
+</html>

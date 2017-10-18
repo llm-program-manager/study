@@ -1,0 +1,39 @@
+1.连接前台页面与后台
+    改html为php
+    加入php代码
+    连接数据库
+    <?php
+        include "conn.php";
+        $type_res=mysql_query("select * from type");
+        $type_str="";
+        $num=1;
+        $sec_str="";
+        $food_str="";
+        while($type_rs=mysql_fetch_assoc($type_res)){
+            if($num==1){
+                $type_str="<li class="current"><a href='#st".$num."'>".$type_rs['tname']."</a><b>6</b></li>;
+            }else{
+                $type_str="<li><a href='#st".$num."'>".$type_rs['tname']."</a><b>6</b></li>;
+            }
+            $food_str=getfood($type_rs['type_id']);
+            $sec_str.="<div class='section' id='st".$num."'>".$food_str."</div>";
+            $num++;
+       }
+
+       function getfood($type_id){
+            include "conn.php";
+            $food_res=mysql_query("select * from food where type_id=".$type_id);
+            $food_info="";
+            while($food_rs=mysql_fetch_assoc($food_res)){
+               // var_dump($food_rs);
+                //echo "<hr>";
+                $food_info.="<div class='prt=lt'>
+                                <div class='lt-lt><img src='images/index/prt_1.jpg'></div>
+                                <div class='lt-ct'>
+                                    <p>.".$food_rs['fname']."</p>
+                                    <p class='pr'>￥<span class='price'>".$food_rs['price']."</span></p>
+                ";
+            }
+            return $food_info;
+       }
+       ?>

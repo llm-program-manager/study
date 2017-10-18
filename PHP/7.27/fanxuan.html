@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>反选</title>
+    <script src="../7.26/js/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    <table border="1px">
+        <tr>
+            <td><input type="checkbox" ng-model="all">全选</td>
+            <td>国家</td>
+            <td>首都</td>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td><input type="checkbox" ng-model="all">{{v.id}}</td>
+            <td>{{v.name}}</td>
+            <td>{{v.capital}}</td>
+        </tr>
+    </table>
+</div>
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.data=[
+            {'id':1,'name':'China','capital':'Beijing'},
+            {'id':2,'name':'America','capital':'Washington,D.C'},
+            {'id':3,'name':'Canada','capital':'Ottwa'}];
+    }])
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+1.\r 回车
+2.去掉特殊字符
+$str="\r\r(:@_@hello world@_@:);
+trim($str);
+输出 :@_@hello world@_@:
+trim($str,"\r\r(::)");去掉指定字符
+3.添加转义字符 addslashes(字符串):
+去除转义字符 stripslashes(字符串);
+4.一个汉字占3个字符,汉符占3个字符
+5.截取字符串
+substr(string,index) 从index开始截取到末尾
+substr(string,index,number)
+substr(string,-index,number) 从末尾截取
+substr(string ,index,-number)从index开始截取到-number
+6.文件上传
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<form action="1.php> method="post" enctype="multipart/form-data">
+    <input type="hidden" name="action" value="upload">
+    <input type="file" name="u_file">
+    <input type="submit" value="上传">
+</form>
+</body>
+</html>
+<?php
+    if($_POST['action']=="upload"){
+        $file_path="./uploads\\";  --路径
+        $picture_name=$_FILES[u_file][name];--获取上传图片的名称
+        $picture_name=strstr($picture_name,".");
+        if($picture_name!=".jpg"){
+            echo "上传格式有误！";
+        }elseif($_FILES[u_file][tmp_name]){
+            move_uploaded_file($_FILES[u_file][tmp_name],$file_path.$_FILES[u_file][name]);
+            echo "上传成功！";
+        }else{
+            echo "上传失败!";
+        }
+    }

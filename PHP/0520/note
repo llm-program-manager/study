@@ -1,0 +1,178 @@
+1.数组
+    var_dump()输出变量的值和类型
+    $arr=array();
+    $arr[0]=0;
+    $arr=array(1,2,3,4);
+    $arr=array("one"=>100,two=>200);
+    var_dump($arr[0])出错
+    var_dump($arr['one'];正确
+    count(数组名) 获取数组长度
+    //二维数组
+    $arr=array(
+                1=>array(a,b,c,d),
+                2=>array(1,2,3,d),
+                3=>array("one","two","three","four")
+                );
+    var_dump($arr）;
+    取值 var_dump($arr['3','two']);
+2.函数
+    函数可以先调用后声明，不能调用不声明会报错
+    php 函数名不区分大小写
+    //定义一个有返回值的函数
+    function fun(){
+        return 12;
+        echo "有返还修理的函数可以当做一个只使用，返回return后面的值后跳出此函数，后面的语句不会被执行";
+    }
+    $a=fun();
+    echo $a;
+    //定义一个有参数的函数
+    funciton myFun($a,$b){//形式参数 形参和实参保持一致，在通用函数的时候赋值 在函数内部作用形参
+        return $a*$b;
+    }
+    echo myFun(5,6);//5,6为实参
+
+
+    //声明一个局部变量 只有在函数内部才能作用 出了函数就出了此变量的声明周期 就会自动消失
+    function myFunc(){
+         $s=5;
+         echo $s;
+         global $i; //global 声明全局变量
+         $i=222;
+    }
+    myfunc();
+    echo $s;
+    echo $i;
+3.demo
+    动态创建表格
+
+    html代码
+    <form action="" method="">
+        <input type="text" name="row">
+        <input type="text" name="col">
+        <input type="submit" value="创建">
+    </form>
+    <style>
+        table,tr{
+            border:1px solid green;
+        }
+        td{
+            border:1px solid red;
+            width:30px;
+            height:50px;
+        }
+    </style>
+    PHP代码
+    /*如果设置row,那么返回true,否则返回false
+        只有先接收值，才能顺利运行，否则会报错
+    */
+    if(isset($_GET['row'])){
+        $row=$_GET['row']
+        $col=_GET['col'];
+    //调用函数
+        createTable($row,$col);
+    }
+    function createTable($row,$col){
+        $str="";
+        $str.="<table>";//字符串拼接所有
+        for($i=0;$i<$row;$i++){
+            $str.="<tr>";
+            for ($j=0;$j<$col;$j++{
+               $str.="<td></td>";
+            }
+            $str.="</tr>";
+        }
+        $str.="</table>";
+        echo $str;
+    }
+
+    比较大小
+    function MaxNum($a,$b){
+        if($a>$b){
+            echo $a;
+        }else(
+            echo $b;
+        }
+    }
+    MaxNum(2,33);
+
+     function MaxNum($a,$b){
+            $c=0;
+            if($a>$b){
+                $c=$a;
+            }else(
+                $c=$b;
+            }
+            return $c;
+        }
+        echo MaxNum(2,33);
+
+     比较学生成绩（选择排序）
+     $arr=myFun(array(22,42,21,53));
+     for($i=0;$i<count($arr);$i++){
+        echo $arr[$i]."<br>";
+     }
+
+     function myFun($array){
+        for($i=0;$i<count($array）-1;$i++)){
+            for($j=$i+1;$j<count($array);$j++){
+                if($array[$i]>$array[$j]){
+                    $t=$array[$i];
+                    $array[$i]=$array[$j];
+                    $array[$j]=$t;
+                }
+            }
+        }
+        return $array;
+     }
+3.字符串操作
+    implode()函数 //数组转换成字符串
+    $arr=array('a','b');
+    for($i=0;$i<2;$i++){
+        echo $arr[$i];
+    }
+    $str=implode(",",$arr);
+    var_dump($str);
+
+    $str="h,e";
+    $arr=explode(",",$str,3);//字符串转换成数组
+    var_dump($arr);
+4.文件操作
+    fread(文件指针，读取字符的长度);
+    fread()使用前要先打开文件 资源
+    a 写操作
+    r 读操作
+    fopen( ，);//打开文件
+    fwrite( ，);//向文件中写内容
+    fclose();//关闭打开的文件
+    文件读写
+    //第一步 打开文件
+    $fp=fopen("msg.txt","a");//执行写操作
+    //第二步 写入文件
+    fwrite($fp,"ada说：hello!");
+    //第三步 关闭文件
+    fclose($fp);
+
+    //打开文件
+    $fp=fopen("msg.txt","r");
+    //读取内容
+    $read=fread($fp,filesize("msg.txt"));//filesize()读取文件的长度
+    //关闭文件
+    fclose();
+    echo $read;
+
+5.其他函数
+    数字函数
+        round(); //对浮点数甲方进行四舍五入
+        ceil(); //进一取整
+        floor();//舍去取整
+        rand(min,max);//随机取整 [min,max]
+    日期函数
+        //方式一
+        date_default_timezone_set(PRC);
+        $data=Date('y').date('m').date('d').date('h').date('i').date('s');
+        echo $data;
+        //方式二
+        date("Y-m-d H:i:s",time()+8*60*60);
+
+
+

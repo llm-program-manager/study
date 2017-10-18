@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select列表</title>
+    <script src="../js/angular.min.js"></script>
+    <style>
+        .ng-cloak{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<!--<div ng-app="h5" ng-controller="ctrl" ng-cloak class="ng-cloak">-->
+    <!--<select ng-model="city" ng-options="name.name as city.city for city in data"></select>-->
+
+<!--</div>-->
+
+    <table ng-app="h5edu" ng-controller="myCtrl" ng-cloak class="ng-cloak">
+        <tr ng-repeat="x in records">
+            <td>{{x.name}}</td>
+            <td>{{x.city}}</td>
+        </tr>
+    </table>
+
+<script>
+//    var m=angular.module("h5",[]);
+//    m.controller("ctrl",['$scope',function($scope){
+//        $scope.data=[
+//            {'name':'总部','city':'北京'},
+//            {'name':'分部','city':'天津'},
+//            {'name':'分部','city':'南宁'}]
+//    }]);
+    var app=angular.module("h5edu",[]);
+    app.controller("myCtrl",['$scope',function($scope){
+        $scope.records=[{'name':'总部','city':'北京'},
+                         {'name':'分部','city':'天津'},
+                         {'name':'分支','city':'南宁'}]
+    }]);
+</script>
+</body>
+</html>

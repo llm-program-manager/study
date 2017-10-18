@@ -1,0 +1,95 @@
+body{
+    background:url("../img/back1.jpg") no-repeat;
+    -webkit-background-size:100% 100%;
+    background-size:100% 100%;
+}
+.msg-publish{
+    width:100%;
+    height: 25rem;
+    background:white;
+    color:black;
+    margin-bottom:0;
+}
+.msg-publish-header,.msg-list-header{
+    width:100%;
+    height:3rem;
+    background:#d6dfd1;
+}
+.msg-publish-header p{
+    width:10rem;
+    height:1rem;
+    float:left;
+    margin-left:1rem;
+}
+.msg-publish-header p+p{
+    margin-left:50rem;
+}
+.msg-btn{
+    width:5rem;
+    height:2rem;
+    margin-left:2rem;
+}
+.msg-list{
+    margin-top:0;
+}
+.msg-list-header{
+   line-height:3rem;
+    color:black;
+    margin-bottom:-1rem;
+}
+.msg-list-header p{
+    margin-left:1rem;
+}
+.msg-list-content{
+    margin:0;
+    padding:0;
+    margin-top:1rem;
+    background:white;
+    border:0.1rem solid gray;
+}
+.msg-every{
+    width:100%;
+    height:10rem;
+    background:white;
+    margin-top:0rem;
+    border:0.1rem solid #ccc;
+}
+.msg-uname{
+    width:10rem;
+    height:10rem;
+    background: white;
+    float:left;
+    margin:0;
+}
+.author,.author-name{
+    width:10rem;
+    height:2rem;
+    text-align: center;
+    line-height:2rem;
+    margin-top:0rem;
+}
+.author,.msg-info{
+   background:#ccc;
+    border:0.1rem solid gray;
+}
+.msg-info{
+    width:100%;
+    margin-top:0rem;
+    height:2rem;
+    text-align: center;
+    line-height:2rem;
+    background:#ccc;
+}
+.msg-utitle{
+    width:5rem;
+    height:2rem;
+    background:blue;
+    float:left;
+}
+.msg-ucontent{
+    width:15rem;
+    height:8rem;
+    float:left;
+    background:black;
+}
+

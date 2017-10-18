@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>改变对象属性</title>
+    <script src="../../7.26/js/angular.min.js"></script>
+    <style>
+        .ng-cloak{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl" ng-cloak class="ng-cloak">
+
+</div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller("ctrl",["$scope",function($scope){
+        var data=[
+            {'name':'h5edu','url':'h5edu.cn'},
+            {'name':'baidu','url':'baidu.com'},
+            {'name':'google','url':'google.com'}];
+        angular.forEach(data,function(v,k){
+            v.url="www."+v.url;
+        })
+        console.log(data);
+    }]);
+</script>
+</body>
+</html>

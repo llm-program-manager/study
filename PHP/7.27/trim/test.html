@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../7.26/js/angular.min.js"></script>
+    <script src="../../7.26/js/jquery.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    <form action="test.php" method="post">
+        <input type="text" ng-model="data" ng-trim name="data">
+        {{data}}
+        <input type="submit" value="提交">
+    </form>
+</div>
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.data="";
+        $('form').submit(function(){
+            $('[name="data"]').val($scope.data);
+            //return false;
+        })
+    }])
+</script>
+</body>
+</html>

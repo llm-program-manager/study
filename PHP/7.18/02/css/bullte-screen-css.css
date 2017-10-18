@@ -1,0 +1,8 @@
+#screen{
+    height:500px;
+    border:1px solid #ccc;
+}
+#screen p{
+    position:absolute;
+    left:1000px;
+}

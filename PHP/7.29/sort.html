@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格排序</title>
+    <script src="../res/angular.min.js"></script>
+    <script src="../res/jquery.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+
+</div>
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.data=[
+            {id:1,click:100,name:'h5'},
+            {id:2,click:100,name:'h5'},
+            {id:3,click:100,name:'h5'}]
+    }])
+</script>
+</body>
+</html>

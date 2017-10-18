@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指令作用域</title>
+    <script src="../res/angular.min.js"></script>
+    <script src="../res/jquery.js"></script>
+    <style>
+        .ng-cloak {
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl" ng-cloak class="ng-cloak">
+    请输入颜色<input type="text" ng-model="color">
+    <!--<h5edu jcolor="pink"></h5edu>--><!--指令里的name jcolor的值为pink时表示字符串，为color时表示变量-->
+    {{name}} <!--$scope.name-->
+    <h5edu jcolor="color"></h5edu>
+</div>
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.name="H5EDU";
+        $scope.color="blue";//绑定变量
+        $scope.callback=function(){
+            return '函数绑定';
+        }
+    }])
+    m.directive("h5edu",(function(){
+        return{
+            restrict:"E",//E element元素
+            //template:'{{name}}<input type="text" ng-model="name">' , //模板
+            //scope:true //默认值是false true为独享，但是初始值会继承$scope.name
+
+            //scope:{}//指令与控制器彻底隔离，初始值不再继承控制器里的内容
+
+//            template:"<span style='color:{{color}}'>h5edu</span>",
+//            scope:{color:'@jcolor'}  //字符串单向绑定 字符串@  变量=  函数&
+            //=双向数据绑定
+//            template:"<span style='color:{{color}}'>h5edu</span>",
+//            scope:{color:'=jcolor'}
+//            &绑定函数
+              template:"<h1>{{color()}}</h1>",
+              scope:{color:'&jcolor'}
+        }
+    }))
+</script>
+</body>
+</html>

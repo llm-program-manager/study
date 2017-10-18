@@ -1,0 +1,24 @@
+user表
+字段名        类型         长度            是否主键
+id             int                            是
+u_name       varchar       20                 否
+u_pass       varchar       20                 否
+u_type       varchar       1                  否
+
+book表
+字段名        类型         长度            是否主键
+b_id             int                            是
+b_name         varchar      50                否
+t_id           varchar      20                否
+b_state        boolean                        否
+b_img          varchar      50                否
+b_description  varchar      50                否
+
+type表
+字段名        类型         长度            是否主键
+id             int                          是
+t_id           varchar      20                否
+t_name         varchar      50                否
+
+用户名         密码
+admin         admin

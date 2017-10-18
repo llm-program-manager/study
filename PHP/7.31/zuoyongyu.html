@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angularJS作用域</title>
+    <script src="../res/angular.min.js"></script>
+    <script src="../res/jquery.js"></script>
+    <style>
+        .ng-cloak{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl" ng-cloak class="ng-cloak">
+    {{name}}
+    <div ng-controller="myctrl" ng-cloak class="ng-cloak">
+        {{name}}
+    </div>
+</div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.name=123;
+    }]);
+    //子控制器会继承父控制器，当子控制器不设置初始值时，会显示父控制器的内容123
+    m.controller('myctrl',['$scope',function($scope){
+//        $scope.name=234;
+    }])
+</script>
+</body>
+</html>

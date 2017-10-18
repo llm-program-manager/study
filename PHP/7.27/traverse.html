@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组遍历</title>
+    <script src="../7.26/js/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl"></div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller('ctrl',['$scope',function($scope){
+        var data=[
+            {'name':'Lily','age':18},
+            {'name':'Liming','age':19},
+            {'name':'Jenny','age':20}];
+        angular.forEach(data,function(v,k){
+            v.age=1+v.age;
+        })
+        console.log(data);
+    }])
+
+</script>
+</body>
+</html>

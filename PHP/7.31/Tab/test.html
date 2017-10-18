@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab面板</title>
+    <script src="../../res/angular.min.js"></script>
+    <script src="../../res/jquery.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    <h5edu></h5edu>
+</div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller('ctrl',['$scope',function($scope){
+
+    }]);
+    m.directive('h5edu',[function(){
+        return{
+            restrict:'E',
+            templateUrl:'tab.html',
+            scope:{},
+            link:function(scope,elem,attr){
+               $(elem).delegate('a','click',function(){
+                   //delegate()操作DOM delegate()方法为指定的元素（属于被选元素的子元素）添加一个或多个事件处理程序，并规定当这些事件发生时运行的函数。
+                   //使用delegate()方法的事件处理程序适用于当前或未来的元素（比如由脚本创建的新元素）
+                   $('a').removeClass('active');
+                   $(this).addClass('active');
+                   var index=$(this).index();
+                   $(elem).find('div.lists').hide();
+                   //eq()与index相差1，index返回的值为1，2，……，eq()返回的值为0，1，……
+                   $(elem).find('div.lists').eq(index-2).show();
+               })
+            },
+            controller:['$scope',function($scope){
+                $scope.data=[
+                    {id:1,title:'培训',data:[
+                        {id:1,title:'h5'},
+                        {id:1,title:'php'}]
+                    },
+                    {id:2,title:'课程',data:[
+                        {id:2,title:'JQuery'},
+                        {id:2,title:'angularJS'}]
+                    }]
+            }]
+        }
+    }])
+</script>
+</body>
+</html>

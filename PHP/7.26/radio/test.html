@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单选按钮</title>
+    <script src="../js/angular.min.js"></script>
+    <style>
+        .ng-cloak{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="h5" ng-controller="Myctrl" ng-cloak class="ng-cloak">
+    网站开启：<br>
+    <input type="radio" ng-model="state" value="1">开启
+    <input type="radio" ng-model="state" value="0">关闭
+    {{state}}
+    <textarea ng-show="state==0" cols="50" rows="10">维护中，请稍候</textarea>
+</div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller("Myctrl",['$scope',function($scope){
+        $scope.value=1;
+    }])
+</script>
+</body>
+</html>

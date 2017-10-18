@@ -1,0 +1,54 @@
+1.一个常量只能定义一次，第二次为同一个变量赋值不起作用。
+2.gettype(）查看变量的类型
+  var_dump()查看变量的类型和值，常用于调错
+3.数据类型转换
+  如果在一个字符串上执行数字操作，PHP会把字符串当作数字处，字符串本身类型不发生变化
+  $a="66PHP";
+  $b="22";
+  $c=$a+$b; //$c=88
+4.强制类型转换
+  $a=1.1;
+  $a=(int)$a;
+     (string)
+     (double)
+     (integer)
+5.$one="first";
+  $$one="linux";
+  echo $one;     //$one=first
+  echo $$one;    //$$one=linux
+  echo $first;  //$first=linux
+6.+= $a+=5;=>$a=$a+5;
+  -= $a-=5;=>$a=$a-5;
+  %= $a%=5;=>$a=$a%5;
+  *= $a*=5;=>$a=$a*5;
+  /= $a/=5;=>$a=$a/5;
+  逻辑运算符(两种写法)
+  and &&
+  or  ||
+  not !
+  xor ^(异或)例：a^b
+7.  &      //按位
+    &&     //逻辑与
+    |      //按位或
+    ||     //逻辑或
+8.三元运算符
+  条件？“满足条件执行的语句”：“不满足条件执行的语句”；
+9.
+    if(false):
+        echo "a";
+    elseif(true):
+        echo "b";
+    endif;
+    输出 b
+   循环语句
+    switch(){
+    case one:
+        语句块;
+        break;
+    case two:
+        语句块;
+        break;
+    default:
+        语句块;
+        break;
+    }

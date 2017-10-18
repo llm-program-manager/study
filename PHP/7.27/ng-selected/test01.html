@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01</title>
+    <script src="../../7.26/js/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    <input type="radio" ng-model="user.sex" ng-value="1">男
+    <input type="radio" ng-model="user.sex" ng-value="2">女
+    <select ng-model="sex">
+        <option value="" ng-selected="user.sex==1">男</option>
+        <option value="" ng-selected="user.sex==2">女</option>
+    </select>
+    <script>
+        var m=angular.module('h5',[]);
+        m.controller('ctrl',['$scope',function($scope){
+            $scope.user={'sex':2};
+        }])
+    </script>
+</div>
+</body>
+</html>

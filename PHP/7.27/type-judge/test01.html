@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断数据类型</title>
+    <script src="../../7.26/js/angular.min.js"></script>
+    <script src="../../7.26/js/jquery.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl"></div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller('ctrl',['$scope',function($scope){
+        var data=[
+            {'name':'h5edu','city':'Beijing'},
+            {'name':'h5edu.cn','city':'China'}];
+        console.log(angular.isArray(data));
+        var time=new Date();
+        console.log(angular.isDate(time));
+        var m=123;
+        var n="123";
+        var add=function(){};
+        var obj={'name':'h5edu'};
+        console.log(angular.equals(m,n));
+        console.log(angular.isString(n));
+        console.log(angular.isNumber(m));
+        console.log(angular.isDefined(m));
+        console.log(angular.isUndefined(n));
+        console.log(angular.isFunction(add));
+        console.log(angular.isObject(obj));
+    }])
+</script>
+</body>
+</html>

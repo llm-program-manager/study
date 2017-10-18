@@ -1,0 +1,72 @@
+1.jquery-ajax(html)
+<script src="jquery-1.12.3.js"></script>
+<input onblur="createAjax()" id="uname"><span id="span"></span>
+<script>
+
+function creatAjax({
+
+    var name=$("#uname").val();
+    var span=$("#span");
+
+    $.ajax(){
+        type:"get",
+        dataType:"html",
+        url:"test.php?uname="+name,
+        data:name,
+        success:function(data){
+            //console.log(data);
+            var obj=eval("("+data+")");
+            //console.log(obj);
+            span.html(obj.msg);
+        }
+    });
+}
+</script>
+
+2.方式2 get方法
+<script src="jquery-1.12.3.js"></script>
+<input onblur="createAjax()" id="uname"><span id="span"></span>
+<script>
+
+function creatAjax({
+
+    var name=$("#uname").val();
+    var span=$("#span");
+    $.get(
+        "test.php?uname='+name",{uname:name},
+        function(data){
+            console.log(data);
+        }
+    );
+
+}
+3.getmenu.php
+include "conn.php";
+$nowpage=1;
+if(isset($_POST['$nowpage'])){
+    $nowpage=$_POST['$nowpage'];
+}
+$res=mysql_query("select * from food limit ".(($nowpage-1)*3).",3");
+$arr=array();
+while($rs=mysql_fetch_assoc($res){
+    //var_dump($rs);
+    $arr[]=$rs;
+}
+echo json_encode($arr);
+
+html
+var nowp=1;
+$(function(){
+    $.post("url",{nowpage:nowp},function(data){
+        console.log(data);
+        var obj=eval("("+data+")");
+        console.log(obj);
+        var str="";
+        //console.log(obj[1]);
+        for(var n=0;n<obj.length;n++){
+            str=$("<div class='swiper-slide red-slide'><div class='little>'"+obj[n].fname+"<img src='../admin/images/"+obj[].f_img+"'>"+"</div></div>");
+        }
+    })
+}
+
+nowp++;

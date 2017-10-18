@@ -1,0 +1,34 @@
+1.return 只有一个返回值。
+2.函数引用：引用函数的返回值。
+3.round(min,max);产生一个min 到 max 的随机整数。
+4.break 跳出当前循环
+break $num; 可设置跳出几层；
+continue 终止循环进入下一次循环,跳出本次循环，继续执行之后的循环
+continue num;  制定跳出几重循环
+5.unset(引用的变量名);  取消引用
+6.对函数的引用,函数名前+&,即&fun是对函数的引用
+function &fun($tmp=0){
+    return $tmp;
+}
+$str=&fun("ok");
+echo "$str";
+7.获取信息
+$_COOKIE 通过cookie传递到脚本的信息，多数是执行php脚本时setcookie设置的
+
+  $_SESSION  主要用于会话控制和页面间值得传递
+  $_POST 获取通过POST提交的数据
+  $_GET 获取通过GET方法提交的数据
+  $_SERVER['SERVER_ADDR']  //当前运行脚本服务器的IP地址
+  $_SERVER['SERVER_NAME'] // 当前运行脚本服务器主机名称
+  $_SERVER['REMOTE_ADDR']//浏览当前页面的用户的IP地址
+  $_SERVER['REMOTE_HOST']//浏览当前页面用户的主机名
+  $_SERVER['PORT'] //用户链接到服务器所使用的端口
+8.检测数据类型
+is_bool //是否是布尔
+  is_string//是否是字符串类型
+  is_float//是否为浮点类型
+  is_int//是否为整数
+  is_null//变量是否为空
+  is_array//是否为数组类型
+  is_object //是否为对象类型
+  is_numeric //是否为数字或者由数字组成的字符串

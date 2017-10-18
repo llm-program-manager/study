@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>改变类</title>
+    <script src="../7.26/js/angular.min.js"></script>
+    <style>
+        .red{
+            background:red;
+        }
+        .font{
+            font-family:"华文楷体";
+        }
+    </style>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+<table>
+    <tr ng-repeat="v in data">
+        <td ng-class-odd="{red:true,font:true}">{{v.name}}</td>
+        <td>{{v.height}}</td>
+    </tr>
+</table>
+</div>
+<script>
+    var m=angular.module("h5",[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.data=[
+            {'name':'姓名','height':'身高'},
+            {'name':'Lily','height':189},
+            {'name':'Liming','height':'173'},
+            {'name':'Judy','height':'165'}];
+    }])
+</script>
+</body>
+</html>

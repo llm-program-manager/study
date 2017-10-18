@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>disabled readonly</title>
+    <script src="../../7.26/js/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="h5" ng-controller="ctrl">
+    <form action="test01.php" method="post">
+        只读<input type="text" readonly name="a" ng-model="v1">
+        不可用 <input type="text" disabled name="b" ng-model="v2">
+        <input type="submit">
+    </form>
+
+</div>
+<script>
+    var m=angular.module('h5',[]);
+    m.controller('ctrl',['$scope',function($scope){
+        $scope.v1="只读";
+        $scope.v2="不可用";
+    }])
+</script>
+</body>
+</html>

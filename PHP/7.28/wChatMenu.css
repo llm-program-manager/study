@@ -1,0 +1,27 @@
+.mobile{
+    width:300px;
+    height:400px;
+    border:1px solid black;
+    display:flex;
+}
+.mobile dl{
+    margin:0px;
+    pading:0px;
+    display:flex;
+    flex-direction:column-reverse;
+    flex:1;
+}
+.mobile dl dt{
+    background:#999;
+    border:1px solid gold;
+    text-align:center;
+}
+.mobile dl dd{
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+}
+.mobile dl dd a{
+    border:1px solid #ccc;
+    text-decoration:none;
+}
